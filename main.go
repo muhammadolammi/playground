@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"goplayground/chwg"
 
 	"golang.org/x/tour/tree"
 )
@@ -245,8 +246,9 @@ func main() {
 	// n := jump(nums)
 	// fmt.Println(n)
 
-	// sum := dp.Sum(9)
-	// fmt.Println(sum)
+	// n := dp.PaidStairCasesPath(8, []int{0, 3, 2, 4, 6, 1, 1, 5, 3})
+	// fmt.Println(n)
+	chwg.Chwg()
 
 }
 

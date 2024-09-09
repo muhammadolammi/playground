@@ -7,4 +7,3 @@ Solving a problem with dynamic programming
 4. Order of computation 
 5. Location of solution
 
-Note: dp solution is mostly a memory trade off for speed, not always the best way to solve solution, greedy is a great alternative.
