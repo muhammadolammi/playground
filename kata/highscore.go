@@ -1,6 +1,8 @@
 package kata
 
-import "strings"
+import (
+	"strings"
+)
 
 var store = map[string]int{
 	"a": 1,
@@ -32,7 +34,7 @@ var store = map[string]int{
 }
 
 func High(s string) string {
-	// your code here
+
 	words := strings.Fields(s)
 	wordCounts := make([]int, len(words))
 	for i, word := range words {
@@ -59,5 +61,6 @@ func findMaxIndex(counts []int) int {
 			maxIndex = i
 		}
 	}
+
 	return maxIndex
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"goplayground/chwg"
 
 	"golang.org/x/tour/tree"
 )
@@ -247,9 +246,29 @@ func main() {
 	// fmt.Println(n)
 
 	// n := dp.PaidStairCasesPath(8, []int{0, 3, 2, 4, 6, 1, 1, 5, 3})
-	// fmt.Println(n)
-	chwg.Chwg()
 
+	// s := kata.Solution(600)
+	// fmt.Println(s)
+	// s := uncommonFromSentences("apple apple", "banana")
+	// fmt.Println(s)
+	board := [][]byte{
+		{'X', 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'X', 'O'},
+		{'X', 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X'},
+		{'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'X'},
+		{'O', 'O', 'O', 'O', 'O', 'O', 'X', 'O', 'O', 'X'},
+		{'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O', 'O', 'O'},
+		{'X', 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O'},
+		{'X', 'O', 'X', 'O', 'O', 'X', 'X', 'O', 'X', 'O'},
+		{'X', 'X', 'O', 'X', 'X', 'O', 'X', 'O', 'O', 'X'},
+		{'O', 'O', 'O', 'O', 'X', 'O', 'X', 'O', 'X', 'O'},
+		{'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'O'},
+	}
+
+	solve(board)
+
+	for _, row := range board {
+		fmt.Println(string(row))
+	}
 }
 
 /**
