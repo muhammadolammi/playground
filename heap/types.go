@@ -2,14 +2,11 @@ package heap
 
 import "fmt"
 
-type Node struct {
-	Value int
-	Right *Node
-	Left  *Node
-}
+const MINHEAP = "MINHEAP"
+const MAXHEAP = "MAXHEAP"
 
 type Heap struct {
-	Root     *Node
+	Data     []int
 	HeapType string
 }
 

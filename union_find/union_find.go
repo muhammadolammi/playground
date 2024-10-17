@@ -1,8 +1,11 @@
 package unionfind
 
+import "fmt"
+
 type UnionFind struct {
 	Array []int
 	Size  []int
+	Max   []int
 }
 
 func NewUnionFind(n int) UnionFind {
@@ -10,13 +13,17 @@ func NewUnionFind(n int) UnionFind {
 	// O(n)
 	arr := make([]int, n)
 	size := make([]int, n)
+	max := make([]int, n)
+
 	for i := 0; i < n; i++ {
 		arr[i] = i
 		size[i] = 1
+		max[i] = i
 	}
 	return UnionFind{
 		Array: arr,
 		Size:  size,
+		Max:   max,
 	}
 }
 
@@ -48,14 +55,28 @@ func NewUnionFind(n int) UnionFind {
 // u.Array[i] is the parent of i
 // the root is the index where u.Array[i]=i
 
-func root(array []int, i int) int {
-	for i != array[i] {
-		// path compression
-		array[i] = array[array[i]]
-		i = array[i]
+func (u UnionFind) Root(i int) int {
+	// for i != array[i] {
+	// 	// path compression
+	// 	array[i] = array[array[i]]
+	// 	i = array[i]
 
+	// }
+	// return i
+
+	// this approach will help with this function
+	root := i
+	// Find the root of the element
+	for root != u.Array[root] {
+		root = u.Array[root]
 	}
-	return i
+	// Path compression
+	for i != root {
+		next := u.Array[i]
+		u.Array[i] = root
+		i = next
+	}
+	return root
 
 }
 
@@ -63,7 +84,7 @@ func root(array []int, i int) int {
 func (u UnionFind) connected(p, q int) bool {
 	// O(n+n) = O(n)
 
-	return root(u.Array, p) == root(u.Array, q)
+	return u.Root(p) == u.Root(q)
 }
 
 // since we use tree in the quick-union
@@ -93,19 +114,53 @@ func (u UnionFind) connected(p, q int) bool {
 func (u UnionFind) Union(p, q int) {
 	// here just one value change
 	// this can take O(N) + the two roots computation
-	rootP := root(u.Array, p)
-	rootQ := root(u.Array, q)
+	rootP := u.Root(p)
+	rootQ := u.Root(q)
+
 	if rootP == rootQ {
 		return // They are already in the same set
 	}
+
 	// get the size of each root the append the lower to the higher
 	if u.Size[rootP] > u.Size[rootQ] {
 		u.Array[rootQ] = rootP
 		u.Size[rootP] += u.Size[rootQ]
+		if u.Max[rootP] < u.Max[rootQ] {
+			u.Max[rootP] = u.Max[rootQ]
+		}
 	} else {
 		u.Array[rootP] = rootQ
 		u.Size[rootQ] += u.Size[rootP]
-
+		if u.Max[rootQ] < u.Max[rootP] {
+			u.Max[rootQ] = u.Max[rootP]
+		}
 	}
 
+}
+
+func (u UnionFind) Find(x int) int {
+	// this should return the highest member in the set x belongs to.
+	xRoot := u.Root(x)
+	// max := -1
+	// for idx, idxroot := range u.Array {
+	// 	if xRoot == idxroot {
+	// 		if idx > max {
+	// 			max = idx
+	// 		}
+	// 	}
+	// }
+	fmt.Println(u.Array)
+	return u.Max[xRoot]
+}
+
+// Remove x from the set
+func (u *UnionFind) Delete(x int) {
+	if x+1 < len(u.Array) {
+		u.Union(x, x+1) // Union x with x+1
+	}
+}
+
+// Find the smallest y >= x that is still in the set
+func (u *UnionFind) Successor(x int) int {
+	return (x)
 }

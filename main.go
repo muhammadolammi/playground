@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"goplayground/heap"
 
 	"golang.org/x/tour/tree"
 )
@@ -54,15 +55,15 @@ func PrintTreeAddresses(t *tree.Tree) {
 }
 
 func main() {
-	ch1 := make(chan int, 10)
-	go Walk(tree.New(1), ch1)
-	for v := range ch1 {
-		fmt.Println(v)
-	}
+	// ch1 := make(chan int, 10)
+	// go Walk(tree.New(1), ch1)
+	// for v := range ch1 {
+	// 	fmt.Println(v)
+	// }
 
-	fmt.Println(Same(tree.New(1), tree.New(1)))
-	fmt.Println(Same(tree.New(1), tree.New(2)))
-	PrintTreeAddresses(tree.New(1))
+	// fmt.Println(Same(tree.New(1), tree.New(1)))
+	// fmt.Println(Same(tree.New(1), tree.New(2)))
+	// PrintTreeAddresses(tree.New(1))
 
 	// fmt.Println(func1())
 
@@ -251,24 +252,134 @@ func main() {
 	// fmt.Println(s)
 	// s := uncommonFromSentences("apple apple", "banana")
 	// fmt.Println(s)
-	board := [][]byte{
-		{'X', 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'X', 'O'},
-		{'X', 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X'},
-		{'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'X'},
-		{'O', 'O', 'O', 'O', 'O', 'O', 'X', 'O', 'O', 'X'},
-		{'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O', 'O', 'O'},
-		{'X', 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O'},
-		{'X', 'O', 'X', 'O', 'O', 'X', 'X', 'O', 'X', 'O'},
-		{'X', 'X', 'O', 'X', 'X', 'O', 'X', 'O', 'O', 'X'},
-		{'O', 'O', 'O', 'O', 'X', 'O', 'X', 'O', 'X', 'O'},
-		{'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'O'},
-	}
+	// board := [][]byte{
+	// 	{'X', 'O', 'X', 'O', 'X', 'O', 'O', 'O', 'X', 'O'},
+	// 	{'X', 'O', 'O', 'X', 'X', 'X', 'O', 'O', 'O', 'X'},
+	// 	{'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'X', 'X'},
+	// 	{'O', 'O', 'O', 'O', 'O', 'O', 'X', 'O', 'O', 'X'},
+	// 	{'O', 'O', 'X', 'X', 'O', 'X', 'X', 'O', 'O', 'O'},
+	// 	{'X', 'O', 'O', 'X', 'X', 'X', 'O', 'X', 'X', 'O'},
+	// 	{'X', 'O', 'X', 'O', 'O', 'X', 'X', 'O', 'X', 'O'},
+	// 	{'X', 'X', 'O', 'X', 'X', 'O', 'X', 'O', 'O', 'X'},
+	// 	{'O', 'O', 'O', 'O', 'X', 'O', 'X', 'O', 'X', 'O'},
+	// 	{'X', 'X', 'O', 'X', 'X', 'X', 'X', 'O', 'O', 'O'},
+	// }
 
-	solve(board)
+	// solve(board)
 
-	for _, row := range board {
-		fmt.Println(string(row))
+	// for _, row := range board {
+	// 	fmt.Println(string(row))
+	// }
+	// grid := [][]byte{
+	// 	{'1', '0', '1', '1', '1'},
+	// 	{'1', '0', '1', '0', '1'},
+	// 	{'1', '1', '1', '0', '1'},
+	// }
+	// n := numIslands(grid)
+	// fmt.Println(n)
+
+	// uf := unionfind.NewUnionFind(10)
+	// uf.Union(1, 2)
+	// uf.Union(1, 6)
+	// uf.Union(1, 9)
+	// uf.Union(3, 5)
+	// fmt.Println(uf.Find(2))
+
+	// l1 := &ListNode{
+	// 	Val: 2, Next: &ListNode{
+	// 		Val: 4, Next: &ListNode{
+	// 			Val: 9, Next: nil},
+	// 	},
+	// }
+
+	// // Create l2 = [5,6,4]
+	// l2 := &ListNode{
+	// 	Val: 5, Next: &ListNode{
+	// 		Val: 6, Next: &ListNode{
+	// 			Val: 4, Next: &ListNode{
+	// 				Val: 9, Next: nil,
+	// 			},
+	// 		},
+	// 	},
+	// }
+	// l := addTwoNumbers(l1, l2)
+	// tranverlinkedlist(l)
+
+	// nums1 := []int{1, 3}
+	// nums2 := []int{2}
+	//CORRECT ANSWER 16
+	// nums1 := []int{1, 12, 15, 26, 38}
+	// nums2 := []int{2, 13, 17, 30, 45}
+	// nums1 := []int{1, 2, 3, 4, 5, 6, 7, 8}
+	// nums2 := []int{1, 2, 3, 4, 5}
+
+	// median := findMedianSortedArrays(nums1, nums2)
+	// fmt.Printf("Median: %v\n", median)
+
+	// Create a sample graph
+	// graph := dijk.GRAPH{
+	// 	Data: map[string]map[string]int{
+	// 		"A": {"B": 3, "D": 5},
+	// 		"B": {},
+	// 		"C": {"B": -10},
+	// 		"D": {"C": 2},
+	// 	},
+	// }
+
+	// // Choose the source node
+	// source := "A"
+
+	// // Call Dijkstra’s algorithm
+	// distances, err := dijk.Dijkstra(graph, source)
+	// if err != nil {
+	// 	fmt.Println("Error:", err)
+	// 	return
+	// }
+
+	// // Print the shortest distances from the source node to each other node
+	// fmt.Printf("Shortest distances from node %s:\n", source)
+	// for node, dist := range distances {
+	// 	fmt.Printf("%s -> %d\n", node, dist)
+	// }
+	// fmt.Println(distances)
+	// path, err := dijk.DijkstraSrcToDest(graph, "A", "B")
+	// if err != nil {
+	// 	fmt.Println("Error:", err)
+	// 	return
+	// }
+	// fmt.Println(path)
+	// graph := bellmanford.GRAPH{
+	// 	Data: map[string]map[string]int{
+	// 		"A": {"B": -4, "D": 3},
+	// 		"B": {"C": -5},
+	// 		"C": {"A": 2, "D": 2},
+	// 		"D": {},
+	// 		"E": {"A": 2, "D": 1},
+	// 	},
+	// }
+	// shortestPath, err := bellmanford.BellmanFord(graph, "A", "C")
+	// if err != nil {
+	// 	fmt.Println("Error:", err)
+	// 	return
+	// }
+	// fmt.Println(shortestPath)
+	heap := heap.Heap{
+		HeapType: heap.MAXHEAP,
 	}
+	heap.Insert(21)
+	heap.Insert(17)
+	heap.Insert(14)
+	heap.Insert(15)
+	heap.Insert(1)
+	heap.Insert(12)
+	heap.Insert(13)
+	heap.Insert(5)
+	heap.Insert(9)
+	heap.Insert(8)
+	heap.Insert(50000)
+	heap.Pop()
+	fmt.Println(heap.Data)
+	fmt.Println(heap.Peek())
 }
 
 /**
