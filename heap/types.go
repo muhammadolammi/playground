@@ -5,8 +5,12 @@ import "fmt"
 const MINHEAP = "MINHEAP"
 const MAXHEAP = "MAXHEAP"
 
+type Node struct {
+	Priority int
+	Value    string
+}
 type Heap struct {
-	Data     []int
+	Data     []Node
 	HeapType string
 }
 

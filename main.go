@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"goplayground/heap"
+	"goplayground/astarsearch"
 
 	"golang.org/x/tour/tree"
 )
@@ -363,23 +363,90 @@ func main() {
 	// 	return
 	// }
 	// fmt.Println(shortestPath)
-	heap := heap.Heap{
-		HeapType: heap.MAXHEAP,
+	// heap := heap.Heap{
+	// 	HeapType: heap.MAXHEAP,
+	// }
+	// heap.Insert(21)
+	// heap.Insert(17)
+	// heap.Insert(14)
+	// heap.Insert(15)
+	// heap.Insert(1)
+	// heap.Insert(12)
+	// heap.Insert(13)
+	// heap.Insert(5)
+	// heap.Insert(9)
+	// heap.Insert(8)
+	// heap.Insert(50000)
+	// heap.Pop()
+	// fmt.Println(heap.Data)
+	// fmt.Println(heap.Peek())
+
+	// pq := pq.NewPriorityQueue()
+
+	// pq.Insert(heap.Node{
+	// 	Priority: 21,
+	// 	Value:    "A",
+	// })
+	// pq.Insert(heap.Node{
+	// 	Priority: 17,
+	// 	Value:    "B",
+	// })
+	// pq.Insert(heap.Node{
+	// 	Priority: 14,
+	// 	Value:    "C",
+	// })
+	// pq.Insert(heap.Node{
+	// 	Priority: 15,
+	// 	Value:    "D",
+	// })
+	// pq.Insert(heap.Node{
+	// 	Priority: 1,
+	// 	Value:    "E",
+	// })
+	// pq.Insert(heap.Node{
+	// 	Priority: 12,
+	// 	Value:    "F",
+	// })
+	// pq.Insert(heap.Node{
+	// 	Priority: 13,
+	// 	Value:    "G",
+	// })
+	// pq.Insert(heap.Node{
+	// 	Priority: 5,
+	// 	Value:    "H",
+	// })
+	// pq.Insert(heap.Node{
+	// 	Priority: 9,
+	// 	Value:    "I",
+	// })
+	// pq.Insert(heap.Node{
+	// 	Priority: 5000,
+	// 	Value:    "J",
+	// })
+	// fmt.Println(pq.Data())
+	grid := astarsearch.Grid{
+		Tiles: [][]astarsearch.Tile{
+			{{0, 0, 1}, {1, 0, 1}, {2, 0, 5}, {3, 0, 1}, {4, 0, 1}},
+			{{0, 1, 1}, {1, 1, 3}, {2, 1, 1}, {3, 1, 1}, {4, 1, 5}},
+			{{0, 2, 5}, {1, 2, 1}, {2, 2, 1}, {3, 2, 3}, {4, 2, 1}},
+			{{0, 3, 1}, {1, 3, 5}, {2, 3, 1}, {3, 3, 1}, {4, 3, 1}},
+			{{0, 4, 1}, {1, 4, 1}, {2, 4, 5}, {3, 4, 1}, {4, 4, 1}},
+		},
+		Width:  5,
+		Height: 5,
 	}
-	heap.Insert(21)
-	heap.Insert(17)
-	heap.Insert(14)
-	heap.Insert(15)
-	heap.Insert(1)
-	heap.Insert(12)
-	heap.Insert(13)
-	heap.Insert(5)
-	heap.Insert(9)
-	heap.Insert(8)
-	heap.Insert(50000)
-	heap.Pop()
-	fmt.Println(heap.Data)
-	fmt.Println(heap.Peek())
+	src := astarsearch.Tile{
+		X: 0,
+		Y: 0,
+	}
+	dest := astarsearch.Tile{
+		X: 4,
+		Y: 4,
+	}
+
+	path := astarsearch.AstarSearch(grid, src, dest)
+	fmt.Println(path)
+
 }
 
 /**
